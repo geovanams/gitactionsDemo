@@ -7,7 +7,7 @@ on:
     branches: [ main ]
     
 env:
-  AZURE_WEBAPP: '.'
+  AZURE_WEBAPP: 'dropteste'
 
 jobs:
   build:
