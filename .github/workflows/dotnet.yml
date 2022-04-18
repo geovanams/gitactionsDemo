@@ -33,6 +33,13 @@ jobs:
       with:
         name: artifact
         path: ${{ env.AZURE_WEBAPP }}/output/
+  
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v1
+      with:
+        name: iac
+        path: Infraestrutura/
+  
 
   deploy-IaC:
     needs: build
@@ -42,8 +49,8 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v2
       with:
-        name: artifact
-        path:  ${{ env.AZURE_WEBAPP }}/output/
+        name: iac
+        path: Infraestrutura/
     
     - name: Azure Login
       uses: Azure/login@v1
@@ -56,5 +63,5 @@ jobs:
         scope: resourcegroup 
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: WebAppTeste
-        template: ${{ env.AZURE_WEBAPP }}/output/infra.json
+        template: infraestrutura/infra.json
         deploymentMode: Incremental
