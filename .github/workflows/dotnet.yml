@@ -63,5 +63,5 @@ jobs:
         scope: resourcegroup 
         subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
         resourceGroupName: WebAppTeste
-        template: infraestrutura/infra.json
+        template: Infraestrutura/infra.json
         deploymentMode: Incremental
