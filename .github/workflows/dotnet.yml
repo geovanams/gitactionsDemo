@@ -46,12 +46,6 @@ jobs:
     name: Deploy Infra
     runs-on: ubuntu-latest
     steps:
-    - name: Download artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: iac
-        path: Infraestrutura/
-    
     - name: Azure Login
       uses: Azure/login@v1
       with:
