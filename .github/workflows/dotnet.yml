@@ -42,8 +42,8 @@ jobs:
     - name: Download artifacts
       uses: actions/download-artifact@v2
       with:
-        name: iac
-        path: '${{ env.AZURE_WEBAPP }}//Infraestrutura'
+        name: artifact
+        path:  ${{ env.AZURE_WEBAPP }}/output/
     
     - name: Azure Login
       uses: Azure/login@v1
