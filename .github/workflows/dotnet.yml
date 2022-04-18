@@ -33,3 +33,28 @@ jobs:
       with:
         name: artifact
         path: ${{ env.AZURE_WEBAPP }}/output/
+
+  deploy-IaC:
+    needs: build
+    name: Deploy Infra
+    runs-on: ubuntu-latest
+    steps:
+    - name: Download artifacts
+      uses: actions/download-artifact@v2
+      with:
+        name: iac
+        path: '${{ env.AZURE_WEBAPP }}//Infraestrutura'
+    
+    - name: Azure Login
+      uses: Azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Azure Resource Manager (ARM) Template
+      uses: Azure/arm-deploy@v1
+      with:
+        scope: resourcegroup 
+        subscriptionId: ${{ secrets.AZURE_SUBSCRIPTION }}
+        resourceGroupName: WebAppTeste
+        template: Infraestrutura/deploy.json
+        deploymentMode: Incremental
